@@ -1,0 +1,7 @@
+matplotlib
+numpy
+pint
+jinja2
+pdflatex
+pytexit
+sortedcontainers
