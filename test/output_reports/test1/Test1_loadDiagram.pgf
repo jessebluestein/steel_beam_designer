@@ -71,8 +71,8 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{3.697403in}{2.311071in}}%
-\pgfpathquadraticcurveto{\pgfqpoint{3.697403in}{1.623589in}}{\pgfqpoint{3.697403in}{0.945000in}}%
+\pgfpathmoveto{\pgfqpoint{3.697403in}{2.158833in}}%
+\pgfpathquadraticcurveto{\pgfqpoint{3.697403in}{1.547451in}}{\pgfqpoint{3.697403in}{0.944962in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
@@ -82,9 +82,9 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{3.780736in}{1.011667in}}%
-\pgfpathlineto{\pgfqpoint{3.697403in}{0.945000in}}%
-\pgfpathlineto{\pgfqpoint{3.614069in}{1.011667in}}%
+\pgfpathmoveto{\pgfqpoint{3.780736in}{1.011629in}}%
+\pgfpathlineto{\pgfqpoint{3.697403in}{0.944962in}}%
+\pgfpathlineto{\pgfqpoint{3.614069in}{1.011629in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%

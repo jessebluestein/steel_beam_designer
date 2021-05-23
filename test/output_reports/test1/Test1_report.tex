@@ -42,7 +42,7 @@
 \textbf{Member:} & {Test1} & \textbf{Firm:} & {ABC Company} \\
 \textbf{Project:} & {123 Maple Street, San Francisco CA} & \textbf{Engineer:} & {Jesse} \\
 \textbf{Level:} & {2} & \textbf{Checker:} & {Joey}  \\
-\textbf{Date:} & {2021-03-28} & \textbf{Page:} & \thepage\\
+\textbf{Date:} & {2021-05-23} & \textbf{Page:} & \thepage\\
 \end{tabular}}
 %	---------------------------- APPLIED LOADS SECTION ---------------------------
 \begin{document}
@@ -92,13 +92,13 @@ The following load combinations are used for the design. Duplicate load combinat
 \hline
 Load Combo & Loads and Factors & Reference\\
 \hline
-LC 1 & 1.4D + 0.5L0 & ASCE7-16 \S2.3.6 (LC 6)\\
+LC 1 & 1.2D + 1.0L0 & ASCE7-16 \S2.3.1 (LC 3)\\
 LC 2 & 0.7D & ASCE7-16 \S2.3.6 (LC 7)\\
-LC 3 & 1.2D + 1.6L0 & ASCE7-16 \S2.3.1 (LC 2)\\
-LC 4 & 1.2D & ASCE7-16 \S2.3.1 (LC 3)\\
-LC 5 & 1.2D + 1.0L0 & ASCE7-16 \S2.3.1 (LC 3)\\
-LC 6 & 0.9D & ASCE7-16 \S2.3.1 (LC 5)\\
-LC 7 & 1.4D & ASCE7-16 \S2.3.1 (LC 1)\\
+LC 3 & 1.4D & ASCE7-16 \S2.3.1 (LC 1)\\
+LC 4 & 0.9D & ASCE7-16 \S2.3.1 (LC 5)\\
+LC 5 & 1.2D & ASCE7-16 \S2.3.1 (LC 3)\\
+LC 6 & 1.2D + 1.6L0 & ASCE7-16 \S2.3.1 (LC 2)\\
+LC 7 & 1.4D + 0.5L0 & ASCE7-16 \S2.3.6 (LC 6)\\
 \hline
 \end{tabular}
 \end{table}
@@ -109,14 +109,14 @@ LC 7 & 1.4D & ASCE7-16 \S2.3.1 (LC 1)\\
 \hline
 Load Combo & Loads and Factors & Reference\\
 \hline
-LC 1 & 1.0D & ASCE7-16 \S2.4.1 (LC 1)\\
-LC 2 & 1.0D + 1.0L0 & ASCE7-16 \S2.4.1 (LC 2)\\
-LC 3 & 1.0L0 & L only deflection check\\
-LC 4 & 0.6D & ASCE7-16 \S2.4.1 (LC 7)\\
-LC 5 & 1.0D + 0.75L0 & ASCE7-16 \S2.4.1 (LC 4)\\
-LC 6 & 0.4D & ASCE7-16 \S2.4.5 (LC 9)\\
-LC 7 & 1.1D + 0.75L0 & ASCE7-16 \S2.4.5 (LC 8)\\
-LC 8 & 1.14D & ASCE7-16 \S2.4.5 (LC 8)\\
+LC 1 & 0.6D & ASCE7-16 \S2.4.1 (LC 7)\\
+LC 2 & 0.4D & ASCE7-16 \S2.4.5 (LC 9)\\
+LC 3 & 1.0D & ASCE7-16 \S2.4.1 (LC 1)\\
+LC 4 & 1.0D + 0.75L0 & ASCE7-16 \S2.4.1 (LC 4)\\
+LC 5 & 1.0L0 & L only deflection check\\
+LC 6 & 1.1D + 0.75L0 & ASCE7-16 \S2.4.5 (LC 8)\\
+LC 7 & 1.14D & ASCE7-16 \S2.4.5 (LC 8)\\
+LC 8 & 1.0D + 1.0L0 & ASCE7-16 \S2.4.1 (LC 2)\\
 \hline
 \end{tabular}
 \end{table}
@@ -262,15 +262,15 @@ F_{cr} & = \cfrac{C_b \cdot \pi^2 \cdot {{E}}} {\left(\cfrac{L_b}{r_{ts}}\right)
 \end{figure}
 C\textsubscript{v1}, the web shear strength coefficient, is calculated per AISC/ANSI 360-16 Eq. G2-3 as follows, based on the ratio of the clear distance between flanges to web thickness:
 \begin{flalign*}
-\frac{h}{t_w} = \frac{10.8 {\color{darkBlue}{\mathbf{ \; in}}}}{0.2 {\color{darkBlue}{\mathbf{ \; in}}}} = \mathbf{54.24999999999999 } <= 1.1\sqrt{\frac{k_v E}{F_y}} = 1.1\sqrt{\frac{5.34 29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{50 {\color{darkBlue}{\mathbf{ \; ksi}}}}} = \mathbf{61.2 } \rightarrow C_{v1} = \mathbf{1.0}
+\frac{h}{t_w} = \frac{10.8 {\color{darkBlue}{\mathbf{ \; in}}}}{0.2 {\color{darkBlue}{\mathbf{ \; in}}}} = \mathbf{54.2 } <= 1.1\sqrt{\frac{k_v E}{F_y}} = 1.1\sqrt{\frac{5.34 29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{50 {\color{darkBlue}{\mathbf{ \; ksi}}}}} = \mathbf{61.2 } \rightarrow C_{v1} = \mathbf{1.0}
 \end{flalign*}
 \textphi\textsubscript{v}, the resistance factor for shear, is calculated per AISC/ANSI 360-16 {\S}G1.a as follows:
 \begin{flalign*}
-\frac{h}{t_w} = \frac{10.8 {\color{darkBlue}{\mathbf{ \; in}}}}{0.2 {\color{darkBlue}{\mathbf{ \; in}}}} = \mathbf{54.24999999999999 } > 2.24\cdot \sqrt{\frac{E}{F_y}} = 2.24\cdot \sqrt{\frac{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{50 {\color{darkBlue}{\mathbf{ \; ksi}}}}} = \mathbf{53.9} \rightarrow \phi_v = \mathbf{0.9}
+\frac{h}{t_w} = \frac{10.8 {\color{darkBlue}{\mathbf{ \; in}}}}{0.2 {\color{darkBlue}{\mathbf{ \; in}}}} = \mathbf{54.2 } > 2.24\cdot \sqrt{\frac{E}{F_y}} = 2.24\cdot \sqrt{\frac{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{50 {\color{darkBlue}{\mathbf{ \; ksi}}}}} = \mathbf{53.9} \rightarrow \phi_v = \mathbf{0.9}
 \end{flalign*}
 \textphi\textsubscript{v}V\textsubscript{n}, the design shear strength, is calculated per AISC/ANSI 360-16 Eq. G2-1 as follows:
 \begin{flalign*}
-\phi_v V_n = 0.6\cdot F_y \cdot A_w \cdot C_{v1}  = 0.6\cdot 50 {\color{darkBlue}{\mathbf{ \; ksi}}} \cdot 2.3800000000000003 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{2}}}} \cdot C_{v1}  = \mathbf{71.4 {\color{darkBlue}{\mathbf{ \; kip}}}}
+\phi_v V_n = 0.6\cdot F_y \cdot A_w \cdot C_{v1}  = 0.6\cdot 50 {\color{darkBlue}{\mathbf{ \; ksi}}} \cdot 2.38 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{2}}}} \cdot 1.0  = \mathbf{71.4 {\color{darkBlue}{\mathbf{ \; kip}}}}
 \end{flalign*}
 \vspace{-26pt}
 {\setlength{\mathindent}{0cm}

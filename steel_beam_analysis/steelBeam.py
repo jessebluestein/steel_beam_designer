@@ -283,9 +283,9 @@ class SteelBeam(Beam):
                     self.ref = f'AISC/ANSI 360-{self.phiVn.beam.specVersion} Eq. G2-4'
 
                 vars = sf.makeVarString('h / t_w')
-                ratioResults = sf.fixUnits(vars, replacements = {'h': round(h, 1), 't_w': tw})
+                ratioResults = sf.fixUnits(vars, replacements = {'h': round(h, 1), 't_w': round(tw, 1)})
                 conditionResults = sf.fixUnits(condition, replacements = {'E': E, 'F_y': Fy, 'k_v': kv})
-                return sf.fixUnits(f'{vars} = {ratioResults} = _bf_{{{(h/tw)}}} {comparison} {condition} = {conditionResults} = _bf_{{{round(limit, 1)}}} \\rightarrow C_{{v1}} = _bf_{{{self.val}}}')
+                return sf.fixUnits(f'{vars} = {ratioResults} = _bf_{{{(round(h/tw, 1))}}} {comparison} {condition} = {conditionResults} = _bf_{{{round(limit, 1)}}} \\rightarrow C_{{v1}} = _bf_{{{self.val}}}')
 
         class phiV():
             """Model the resistance factor for shear."""
@@ -313,7 +313,7 @@ class SteelBeam(Beam):
 
                 vars = sf.makeVarString('h / t_w')
                 ratioResults = sf.fixUnits(vars, replacements = {'h': round(h, 1), 't_w': tw})
-                completeEqn = f'{vars} = {ratioResults} = _bf_{{{(h/tw)}}} {comparison} {self.phiVn.beam.makeE_FyString(2.24)} \\rightarrow \\phi_v = _bf_{{{self.val}}}'
+                completeEqn = f'{vars} = {ratioResults} = _bf_{{{(round(h/tw, 1))}}} {comparison} {self.phiVn.beam.makeE_FyString(2.24)} \\rightarrow \\phi_v = _bf_{{{self.val}}}'
                 return sf.fixUnits(completeEqn, type = 'math')
 
         def updateFactor(self):
@@ -322,7 +322,7 @@ class SteelBeam(Beam):
             self.phiV.updateFactor()
             self.val = 0.6 * self.beam.Fy * self.beam.Aw * self.beam.phiVn.Cv1.val
             self.ref = f'AISC/ANSI 360-{self.beam.specVersion} Eq. G2-1'
-            return sf.makeEquation('\\phi_v V_n', '0.6 *mul* F_y *mul* A_w *mul* C_v1', {'F_y': self.beam.Fy, 'A_w': self.beam.Aw, 'C_v1': self.beam.phiVn.Cv1.val, '\\phi_v': self.phiV.val}, self.val.to(self.beam.outUnit['V']))
+            return sf.makeEquation('\\phi_v V_n', '0.6 *mul* F_y *mul* A_w *mul* C_v1', {'F_y': self.beam.Fy, 'A_w': round(self.beam.Aw, 2), 'C_{v1}': round(self.beam.phiVn.Cv1.val, 2), '\\phi_v': self.phiV.val}, self.val.to(self.beam.outUnit['V']))
 
     class rts():
         """Model rts factor used in calculation of Lr and Cb."""
