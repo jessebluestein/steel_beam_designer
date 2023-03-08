@@ -1,0 +1,325 @@
+\documentclass[12pt, fleqn]{article}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{marginnote}
+\usepackage{wallpaper}
+\usepackage{lastpage}
+\usepackage[left=1.3cm,right=2.0cm,top=1.8cm,bottom=5.0cm,marginparwidth=3.4cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{textgreek}
+\usepackage{textcomp}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{subfigure}
+\usepackage{caption}
+\captionsetup{justification=centering,labelfont=bf, belowskip=12pt,aboveskip=12pt}
+\usepackage{textcomp}
+\setlength{\headheight}{70pt}
+\setlength{\textfloatsep}{12pt}
+\setlength{\intextsep}{0pt}
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\definecolor{darkBlue}{cmyk}{.80, .32, 0, 0}
+\setlength{\parindent}{0cm}
+\newcommand{\tab}{\hspace*{2em}}
+\newcommand\BackgroundStructure{
+\setlength{\unitlength}{1mm}
+\setlength\fboxsep{0mm}
+\setlength\fboxrule{0.5mm}
+\put(10, 20pr){\fcolorbox{black}{gray!5}{\framebox(155,247){}}}
+\put(165, 20){\fcolorbox{black}{gray!10}{\framebox(37,247){}}}
+\put(10, 262){\fcolorbox{black}{white!10}{\framebox(192, 25){}}}
+\put(175, 263){\includegraphics{}}}
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+%	----------------------------------- HEADER -----------------------------------
+\fancyhead[L]{\begin{tabular}{l l | l l}
+\textbf{Member:} & {Test4} & \textbf{Firm:} & {ABC Company} \\
+\textbf{Project:} & {123 Maple Street, San Francisco CA} & \textbf{Engineer:} & {Jesse} \\
+\textbf{Level:} & {2} & \textbf{Checker:} & {Joey}  \\
+\textbf{Date:} & {2021-05-23} & \textbf{Page:} & \thepage\\
+\end{tabular}}
+%	---------------------------- APPLIED LOADS SECTION ---------------------------
+\begin{document}
+\begin{center}
+\textbf{\LARGE W10x22 Design Report}
+\end{center}
+\section{Applied Loading}
+\vspace{-30pt}
+\begin{figure}[H]
+\begin{center}
+\input{output_reports/test4/Test4_loadDiagram.pgf}
+\end{center}
+\vspace{-18pt}
+\caption{Applied Loads}
+\end{figure}
+The following distributed loads are applied to the beam. The program can handle all possible mass and force units in both metric and imperial systems simultaneously. Loads are plotted to scale according to their relative magnitudes. A "positive" load is defined as a load acting in the direction of gravity.
+\begin{table}[ht]
+\caption{Applied Distributed Loads}
+\centering
+\begin{tabular}{l l l l l l l}
+\hline
+Load & Start Loc. & Start Mag. & End Loc. & End Mag. & Type & Description\\
+\hline
+w\textsubscript{1} & 0 {\color{darkBlue}{\textbf{ft}}} & 2.0 {\color{darkBlue}{\textbf{kN/m}}} & 8 {\color{darkBlue}{\textbf{yd}}} & 2.0 {\color{darkBlue}{\textbf{kN/m}}} & D & Force line load (mixed units)\\
+w\textsubscript{2} & 0 {\color{darkBlue}{\textbf{ft}}} & 500.0 {\color{darkBlue}{\textbf{kg/m}}} & 5 {\color{darkBlue}{\textbf{m}}} & 1000.0 {\color{darkBlue}{\textbf{kg/m}}} & L & Mass line load (mixed units)\\
+w\textsubscript{3} & 20 {\color{darkBlue}{\textbf{ft}}} & 0.25 {\color{darkBlue}{\textbf{klf}}} & 25 {\color{darkBlue}{\textbf{ft}}} & 0.25 {\color{darkBlue}{\textbf{klf}}} & L & KLF line load\\
+\hline
+\end{tabular}
+\end{table}
+\begin{table}[ht]
+\caption{Applied Point Loads}
+\centering
+\begin{tabular}{l l l l l l}
+\hline
+Load & Loc. & Shear & Type & Description \\
+\hline
+P\textsubscript{1} & 0 {\color{darkBlue}{\textbf{ft}}} & 2 {\color{darkBlue}{\textbf{kip}}} & D & Post load\\
+P\textsubscript{2} & 0 {\color{darkBlue}{\textbf{ft}}} & 4 {\color{darkBlue}{\textbf{kip}}} & L & Post load\\
+P\textsubscript{3} & 5 {\color{darkBlue}{\textbf{ft}}} & 2 {\color{darkBlue}{\textbf{kip}}} & D & Post load\\
+P\textsubscript{4} & 5 {\color{darkBlue}{\textbf{ft}}} & 4 {\color{darkBlue}{\textbf{kip}}} & L & Post load\\
+\hline
+\end{tabular}
+\end{table}
+%	-------------------------------- LOAD COMBOS	--------------------------------
+\section{Load Combinations}
+The following load combinations are used for the design. Duplicate load combinations are not listed and only loads that are used on the beam are included in the load combinations (i.e. If soil load is not included as a load type in any of the applied loads, then "H" loads will not be included in the listed load combinations). S\textsubscript{DS} is input as 1.0 and \textOmega\textsubscript{0} is input as 2.5 for use in seismic load combinations. Any load designated as a pattern load is applied to spans in all possible permutations to create the most extreme loading condition. Numbers after a load indicate the span over which the pattern load is applied (i.e. L0 indicates that live load is applied only on the first span).
+\begin{table}[H]
+\caption{Strength (LRFD) Load Combinations}
+\centering
+\begin{tabular}{l l l}
+\hline
+Load Combo & Loads and Factors & Reference\\
+\hline
+LC 1 & 0.7D & ASCE7-16 \S2.3.6 (LC 7)\\
+LC 2 & 1.2D + 1.0L1 & ASCE7-16 \S2.3.1 (LC 3)\\
+LC 3 & 0.9D & ASCE7-16 \S2.3.1 (LC 5)\\
+LC 4 & 1.2D & ASCE7-16 \S2.3.1 (LC 3)\\
+LC 5 & 1.2D + 1.6L1 & ASCE7-16 \S2.3.1 (LC 2)\\
+LC 6 & 1.2D + 1.0L0 + 1.0L1 & ASCE7-16 \S2.3.1 (LC 3)\\
+LC 7 & 1.2D + 1.6L0 + 1.6L1 & ASCE7-16 \S2.3.1 (LC 2)\\
+LC 8 & 1.4D + 0.5L0 + 0.5L1 & ASCE7-16 \S2.3.6 (LC 6)\\
+LC 9 & 1.2D + 1.0L0 & ASCE7-16 \S2.3.1 (LC 3)\\
+LC 10 & 1.4D + 0.5L0 & ASCE7-16 \S2.3.6 (LC 6)\\
+LC 11 & 1.4D + 0.5L1 & ASCE7-16 \S2.3.6 (LC 6)\\
+LC 12 & 1.2D + 1.6L0 & ASCE7-16 \S2.3.1 (LC 2)\\
+LC 13 & 1.4D & ASCE7-16 \S2.3.1 (LC 1)\\
+\hline
+\end{tabular}
+\end{table}
+\begin{table}[H]
+\caption{Deflection (ASD) Load Combinations}
+\centering
+\begin{tabular}{l l l}
+\hline
+Load Combo & Loads and Factors & Reference\\
+\hline
+LC 1 & 1.0D + 1.0L0 + 1.0L1 & ASCE7-16 \S2.4.1 (LC 2)\\
+LC 2 & 1.0D + 1.0L0 & ASCE7-16 \S2.4.1 (LC 2)\\
+LC 3 & 1.0L1 & L only deflection check\\
+LC 4 & 1.14D & ASCE7-16 \S2.4.5 (LC 8)\\
+LC 5 & 1.1D + 0.75L1 & ASCE7-16 \S2.4.5 (LC 8)\\
+LC 6 & 1.0D & ASCE7-16 \S2.4.1 (LC 1)\\
+LC 7 & 1.0L0 + 1.0L1 & L only deflection check\\
+LC 8 & 1.0D + 0.75L0 + 0.75L1 & ASCE7-16 \S2.4.1 (LC 4)\\
+LC 9 & 1.0D + 0.75L0 & ASCE7-16 \S2.4.1 (LC 4)\\
+LC 10 & 1.0D + 1.0L1 & ASCE7-16 \S2.4.1 (LC 2)\\
+LC 11 & 1.1D + 0.75L0 & ASCE7-16 \S2.4.5 (LC 8)\\
+LC 12 & 1.1D + 0.75L0 + 0.75L1 & ASCE7-16 \S2.4.5 (LC 8)\\
+LC 13 & 0.6D & ASCE7-16 \S2.4.1 (LC 7)\\
+LC 14 & 1.0L0 & L only deflection check\\
+LC 15 & 1.0D + 0.75L1 & ASCE7-16 \S2.4.1 (LC 4)\\
+LC 16 & 0.4D & ASCE7-16 \S2.4.5 (LC 9)\\
+\hline
+\end{tabular}
+\end{table}
+%	---------------------- SECTIONAL & MATERIAL PROPERTIES -----------------------
+\section{Sectional and Material Properties}
+The following are sectional and material properties used for analysis \textbf{(W10x22, Grade A992)}:
+\begin{table}[ht]
+\caption{Sectional and Material Properties}
+\vspace{-10pt}
+\centering
+\begin{tabular}{lll}
+\centering
+\begin{tabular}[t]{ll}
+\cline{1-2}
+Property & Value \\
+\cline{1-2}
+A\textsubscript{w} & 2.4 {\color{darkBlue}{\textbf{{\color{darkBlue}{\textbf{in}}}\textsuperscript{2}}}} \\
+C\textsubscript{w} & 275 {\color{darkBlue}{\textbf{{\color{darkBlue}{\textbf{in}}}\textsuperscript{6}}}} \\
+F\textsubscript{u} & 65 {\color{darkBlue}{\textbf{ksi}}} \\
+F\textsubscript{y} & 50 {\color{darkBlue}{\textbf{ksi}}} \\
+I\textsubscript{x} & 118 {\color{darkBlue}{\textbf{{\color{darkBlue}{\textbf{in}}}\textsuperscript{4}}}} \\
+I\textsubscript{y} & 11.4 {\color{darkBlue}{\textbf{{\color{darkBlue}{\textbf{in}}}\textsuperscript{4}}}} \\
+\cline{1-2}
+\end{tabular}
+&
+\begin{tabular}[t]{ll}
+\cline{1-2}
+Property & Value \\
+\cline{1-2}
+S\textsubscript{x} & 23.2 {\color{darkBlue}{\textbf{{\color{darkBlue}{\textbf{in}}}\textsuperscript{3}}}} \\
+S\textsubscript{y} & 4.0 {\color{darkBlue}{\textbf{{\color{darkBlue}{\textbf{in}}}\textsuperscript{3}}}} \\
+Z\textsubscript{x} & 26 {\color{darkBlue}{\textbf{{\color{darkBlue}{\textbf{in}}}\textsuperscript{3}}}} \\
+Z\textsubscript{y} & 6.1 {\color{darkBlue}{\textbf{{\color{darkBlue}{\textbf{in}}}\textsuperscript{3}}}} \\
+r\textsubscript{x} & 4.3 {\color{darkBlue}{\textbf{in}}} \\
+r\textsubscript{y} & 1.3 {\color{darkBlue}{\textbf{in}}} \\
+\cline{1-2}
+\end{tabular}
+&
+\begin{tabular}[t]{ll}
+\cline{1-2}
+Property & Value \\
+\cline{1-2}
+b\textsubscript{f} & 5.8 {\color{darkBlue}{\textbf{in}}} \\
+t\textsubscript{f} & 0.4 {\color{darkBlue}{\textbf{in}}} \\
+t\textsubscript{w} & 0.2 {\color{darkBlue}{\textbf{in}}} \\
+h\textsubscript{0} & 9.8 {\color{darkBlue}{\textbf{in}}} \\
+U.W. & 490 {\color{darkBlue}{\textbf{pcf}}} \\
+\cline{1-2}
+\end{tabular}
+\end{tabular}
+\end{table}
+%	-------------------------------- BENDING CHECK -------------------------------
+\section{Bending Check}
+\begin{figure}[H]
+\begin{center}
+\input{output_reports/test4/Test4_moment.pgf}
+\end{center}
+\caption{Moment Demand Envelope}
+\end{figure}
+L\textsubscript{p}, the limiting laterally unbraced length for the limit state of yielding, is calculated per AISC/ANSI 360-16 Eq. F2-5 as follows:
+\begin{flalign*}
+L_p = 1.76\cdot r_y \cdot \sqrt{\frac{E}{F_y}}  = 1.76\cdot 1.33 {\color{darkBlue}{\mathbf{ \; in}}} \cdot \sqrt{\frac{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{50 {\color{darkBlue}{\mathbf{ \; ksi}}}}}  = \mathbf{4.7 {\color{darkBlue}{\mathbf{ \; ft}}}}
+\end{flalign*}
+r\textsubscript{ts}, a coefficient used in the calculation of L\textsubscript{r} and C\textsubscript{b}, is calculated per AISC/ANSI 360-16 Eq. F2-7 as follows:
+\begin{flalign*}
+r_{{ts}} = \sqrt{\frac{\sqrt{I_y \cdot C_w}}{S_x}}  = \sqrt{\frac{\sqrt{11.4 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{4}}}} \cdot 275 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{6}}}}}}{23.2 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{3}}}}}}  = \mathbf{1.6 {\color{darkBlue}{\mathbf{ \; in}}}}
+\end{flalign*}
+L\textsubscript{r}, the limiting unbraced length for the limit state of inelastic lateral-torsional buckling, is calculated per AISC/ANSI 360-16 Eq. F2-6 as follows:
+\begin{flalign*}
+L_r &= 1.95\cdot r_{ts} \cdot \frac{E}{0.7\cdot F_y} \sqrt{\frac{J \cdot c}{S_x \cdot h_0}+\sqrt{{\left(\frac{J \cdot c}{S_x \cdot h_0}\right)}^2+6.76{\left(\frac{0.7\cdot F_y}{E}\right)}^2}} \\ &= 1.95\cdot 1.6 {\color{darkBlue}{\mathbf{ \; in}}} \cdot \frac{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{0.7\cdot 50 {\color{darkBlue}{\mathbf{ \; ksi}}}} \sqrt{\frac{0.24 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{4}}}} \cdot 1}{23.2 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{3}}}} \cdot 9.8 {\color{darkBlue}{\mathbf{ \; in}}}}+\sqrt{{\left(\frac{0.24 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{4}}}} \cdot 1}{23.2 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{3}}}} \cdot 9.8 {\color{darkBlue}{\mathbf{ \; in}}}}\right)}^2+6.76{\left(\frac{0.7\cdot 50 {\color{darkBlue}{\mathbf{ \; ksi}}}}{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}\right)}^2}} \\ &= \mathbf{13.8 {\color{darkBlue}{\mathbf{ \; ft}}}}
+\end{flalign*}
+\textlambda\textsubscript{web}, the web width-to-thickness ratio, is calculated per {AISC/ANSI 360-16 Table B4.1b} as follows:
+\begin{flalign*}
+\lambda_{{web}} = \frac{h}{t_w}  = \frac{8.88 {\color{darkBlue}{\mathbf{ \; in}}}}{0.24 {\color{darkBlue}{\mathbf{ \; in}}}}  = \mathbf{37.0 }
+\end{flalign*}
+\textlambda\textsubscript{P-web}, the limiting width-to-thickness ratio for compact/noncompact web, is calculated per {AISC/ANSI 360-16 Table B4.1b} as follows:
+\begin{flalign*}
+\lambda_{P-web} = 3.76\cdot \sqrt{\frac{E}{F_y}} = 3.76\cdot \sqrt{\frac{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{50 {\color{darkBlue}{\mathbf{ \; ksi}}}}} = \mathbf{90.6}
+\end{flalign*}
+\textlambda\textsubscript{R-web}, the limiting width-to-thickness ratio for noncompact/slender web, is calculated per {AISC/ANSI 360-16 Table B4.1b} as follows:
+\begin{flalign*}
+\lambda_{R-web} = 5.7\cdot \sqrt{\frac{E}{F_y}} = 5.7\cdot \sqrt{\frac{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{50 {\color{darkBlue}{\mathbf{ \; ksi}}}}} = \mathbf{137.3}
+\end{flalign*}
+\textlambda\textsubscript{web} $<$ \textlambda\textsubscript{P-web} \textrightarrow \; \textbf{Compact Web}
+\\\\
+\textlambda\textsubscript{flange}, the flange width-to-thickness ratio, is calculated per {AISC/ANSI 360-16 Table B4.1b} as follows:
+\begin{flalign*}
+\lambda_{{flange}} = \frac{b}{t}  = \frac{2.88 {\color{darkBlue}{\mathbf{ \; in}}}}{0.36 {\color{darkBlue}{\mathbf{ \; in}}}}  = \mathbf{8.0 }
+\end{flalign*}
+\textlambda\textsubscript{P-flange}, the limiting width-to-thickness ratio for compact/noncompact flange, is calculated per {AISC/ANSI 360-16 Table B4.1b} as follows:
+\begin{flalign*}
+\lambda_{P-flange} = 0.38\cdot \sqrt{\frac{E}{F_y}} = 0.38\cdot \sqrt{\frac{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{50 {\color{darkBlue}{\mathbf{ \; ksi}}}}} = \mathbf{9.2}
+\end{flalign*}
+\textlambda\textsubscript{R-flange}, the limiting width-to-thickness ratio for noncompact/slender flange, is calculated per {AISC/ANSI 360-16 Table B4.1b} as follows:
+\begin{flalign*}
+\lambda_{R-flange} = 1\cdot \sqrt{\frac{E}{F_y}} = 1\cdot \sqrt{\frac{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{50 {\color{darkBlue}{\mathbf{ \; ksi}}}}} = \mathbf{24.1}
+\end{flalign*}
+\textlambda\textsubscript{flange} $<$ \textlambda\textsubscript{P-flange} \textrightarrow \; \textbf{Compact Flange}
+\\\\
+Since \(\mathbf{{L_b} > {L_r}}\) and the beam's flanges are \textbf{compact}, controlling limit state for flexure is \textbf{inelastic LTB (not to exceed capacity based on yielding)}.
+\\\\
+M\textsubscript{p}, the plastic bending moment, is calculated per AISC/ANSI 360-16 Eq. F2-1 as follows:
+\begin{flalign*}
+M_p = F_y \cdot Z_x  = 50 {\color{darkBlue}{\mathbf{ \; ksi}}} \cdot 26 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{3}}}}  = \mathbf{108.3 {\color{darkBlue}{\mathbf{ \; kft}}}}
+\end{flalign*}
+C\textsubscript{b}, the lateral-torsional buckling modification factor in the critical unbraced span for the critical load combination, is calculated per AISC/ANSI 360- 16 Sec. F1 as follows:
+\\
+\begin{flalign*}
+C_b &= \frac{12.5\cdot M_{max}}{2.5\cdot M_{max}+3\cdot M_A+4\cdot M_B+3\cdot M_C} \\ &= \frac{12.5\cdot 42.1 {\color{darkBlue}{\mathbf{ \; kft}}}}{2.5\cdot 42.1 {\color{darkBlue}{\mathbf{ \; kft}}}+3\cdot 32.8 {\color{darkBlue}{\mathbf{ \; kft}}}+4\cdot 33.0 {\color{darkBlue}{\mathbf{ \; kft}}}+3\cdot 8.2 {\color{darkBlue}{\mathbf{ \; kft}}}} \\ &= \mathbf{1.5 }
+\end{flalign*}
+\\
+For brevity, the C\textsubscript{b} calculation is not shown for each span. The following figure illustrates the value of C\textsubscript{b} for each span.
+\begin{figure}[H]
+\begin{center}
+\input{output_reports/test4/Test4_Cb.pgf}
+\end{center}
+\caption{C\textsubscript{b} Along Member}
+\end{figure}
+F\textsubscript{cr}, the buckling stress for the critical section in the critical unbraced span, is calculated per AISC/ANSI 360- 16 Eq. F2-4 as follows:
+\begin{flalign*}
+F_{cr} & = \cfrac{C_b \cdot \pi^2 \cdot {{E}}} {\left(\cfrac{L_b}{r_{ts}}\right)^2} \cdot \sqrt{1 + 0.078 \cdot \cfrac{{J} \cdot {c}}{{S_x} \cdot h_0} \cdot \left(\cfrac{L_b}{r_{ts}}\right)^2} \\ & = \cfrac{1.46  \cdot \pi^2 \cdot {{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}}} {\left(\cfrac{15 {\color{darkBlue}{\mathbf{ \; ft}}}}{1.6 {\color{darkBlue}{\mathbf{ \; in}}}}\right)^2} \cdot \sqrt{1 + 0.078 \cdot \cfrac{{0.239 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{4}}}}} \cdot {1}}{{23.2 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{3}}}}} \cdot 9.8 {\color{darkBlue}{\mathbf{ \; in}}}} \cdot \left(\cfrac{15 {\color{darkBlue}{\mathbf{ \; ft}}}}{1.6 {\color{darkBlue}{\mathbf{ \; in}}}}\right)^2} = \mathbf{45.1 {\color{darkBlue}{\mathbf{ \; ksi}}}}
+\end{flalign*}
+\\
+\textphi\textsubscript{b}, the resistance factor for bending, is determined per AISC/ANSI 360-16 {\S}F1a as \textbf{0.9}.
+\\\\
+\textphi\textsubscript{b}M\textsubscript{n}, the design flexural strength, is calculated per AISC/ANSI 360-16 Eq. F2-3 as follows:
+\begin{flalign*}
+{\phi_b}{M_{n}} & = {\phi_b} \cdot {F_{cr}} \cdot {S_{x}} < {\phi_b} \cdot {M_p} \\ & = {0.9} \cdot {45.1 {\color{darkBlue}{\mathbf{ \; ksi}}}} \cdot {23.2 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{3}}}}} < {0.9} \cdot {108.3 {\color{darkBlue}{\mathbf{ \; kft}}}} = \mathbf{78.5 {\color{darkBlue}{\mathbf{ \; kft}}}}
+\end{flalign*}
+\vspace{-20pt}
+{\setlength{\mathindent}{0cm}
+\begin{flalign*}
+\mathbf{|M_u| = 42.1 {\color{darkBlue}{\mathbf{ \; kft}}}  \;  < \phi_b \cdot M_n = 78.5 {\color{darkBlue}{\mathbf{ \; kft}}}  \;  (DCR = 0.54 - OK)}
+\end{flalign*}
+\textbf{(inelastic LTB controls)}
+%	-------------------------------- SHEAR CHECK ---------------------------------
+\section{Shear Check}
+\begin{figure}[H]
+\begin{center}
+\input{output_reports/test4/Test4_shear.pgf}
+\end{center}
+\caption{Shear Demand Envelope}
+\end{figure}
+C\textsubscript{v1}, the web shear strength coefficient, is calculated per AISC/ANSI 360-16 Eq. G2-2 as follows, based on the ratio of the clear distance between flanges to web thickness:
+\begin{flalign*}
+\frac{h}{t_w} = \frac{8.9 {\color{darkBlue}{\mathbf{ \; in}}}}{0.2 {\color{darkBlue}{\mathbf{ \; in}}}} = \mathbf{37.0 } <= 2.24\sqrt{\frac{E}{F_y}} = 2.24\sqrt{\frac{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{50 {\color{darkBlue}{\mathbf{ \; ksi}}}}} = \mathbf{53.9 } \rightarrow C_{v1} = \mathbf{1.0}
+\end{flalign*}
+\textphi\textsubscript{v}, the resistance factor for shear, is calculated per AISC/ANSI 360-16 {\S}G2.1.a as follows:
+\begin{flalign*}
+\frac{h}{t_w} = \frac{8.9 {\color{darkBlue}{\mathbf{ \; in}}}}{0.24 {\color{darkBlue}{\mathbf{ \; in}}}} = \mathbf{37.0 } <= 2.24\cdot \sqrt{\frac{E}{F_y}} = 2.24\cdot \sqrt{\frac{29000 {\color{darkBlue}{\mathbf{ \; ksi}}}}{50 {\color{darkBlue}{\mathbf{ \; ksi}}}}} = \mathbf{53.9} \rightarrow \phi_v = \mathbf{1.0}
+\end{flalign*}
+\textphi\textsubscript{v}V\textsubscript{n}, the design shear strength, is calculated per AISC/ANSI 360-16 Eq. G2-1 as follows:
+\begin{flalign*}
+\phi_v V_n = 0.6\cdot F_y \cdot A_w \cdot C_{v1}  = 0.6\cdot 50 {\color{darkBlue}{\mathbf{ \; ksi}}} \cdot 2.45 {\color{darkBlue}{\mathbf{ \; {\color{darkBlue}{\mathbf{ \; in}}}^{2}}}} \cdot 1.0  = \mathbf{73.4 {\color{darkBlue}{\mathbf{ \; kip}}}}
+\end{flalign*}
+\vspace{-26pt}
+{\setlength{\mathindent}{0cm}
+\begin{flalign*}
+\mathbf{|V_u| = 12.6 {\color{darkBlue}{\mathbf{ \; kip}}}  \;  < \phi_v \cdot V_n = 73.4 {\color{darkBlue}{\mathbf{ \; kip}}}  \;  (DCR = 0.17 - OK)}
+\end{flalign*}
+%	----------------------------- DEFLECTION CHECK -------------------------------
+\section{Deflection Check}
+\begin{figure}[H]
+\begin{center}
+\input{output_reports/test4/Test4_defl.pgf}
+\end{center}
+\caption{Deflection Envelope}
+\end{figure}
+Tl Deflection Check: $\Delta_{max} = -0.26 {\color{darkBlue}{\mathbf{ \; in}}} = \cfrac{L}{681} < \cfrac{L}{1.0}  \;  \mathbf{(OK)}$\\
+\bigbreak
+Ll Deflection Check: $\Delta_{max} = -0.19 {\color{darkBlue}{\mathbf{ \; in}}} = \cfrac{L}{933} < \cfrac{L}{1.0}  \;  \mathbf{(OK)}$\\
+\bigbreak
+\vspace{-30pt}
+%	---------------------------------- REACTIONS ---------------------------------
+\section{Reactions}
+The following is a summary of service-level reactions at each support:
+\begin{table}[ht]
+\caption{Reactions at Supports}
+\centering
+\begin{tabular}{l l l l l }
+\hline
+Loc. & Type & D & L0 & L1\\
+\hline
+0 {\color{darkBlue}{\textbf{ft}}} & Shear & 4.0 {\color{darkBlue}{\textbf{kip}}} & 9.0 {\color{darkBlue}{\textbf{kip}}} & -0.0 {\color{darkBlue}{\textbf{kip}}}\\ 15 {\color{darkBlue}{\textbf{ft}}} & Shear & 3.4 {\color{darkBlue}{\textbf{kip}}} & 8.4 {\color{darkBlue}{\textbf{kip}}} & 1.0 {\color{darkBlue}{\textbf{kip}}}\\ 25 {\color{darkBlue}{\textbf{ft}}} & Shear & -0.1 {\color{darkBlue}{\textbf{kip}}} & -2.2 {\color{darkBlue}{\textbf{kip}}} & 1.1 {\color{darkBlue}{\textbf{kip}}}\\ 25 {\color{darkBlue}{\textbf{ft}}} & Moment & 1.0 {\color{darkBlue}{\textbf{kft}}} & 6.8 {\color{darkBlue}{\textbf{kft}}} & -1.8 {\color{darkBlue}{\textbf{kft}}}\\ 
+\hline
+\end{tabular}
+\end{table}
+\end{document}
